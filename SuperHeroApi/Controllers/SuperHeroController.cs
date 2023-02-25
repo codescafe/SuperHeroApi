@@ -19,13 +19,13 @@ namespace SuperHeroApi.Controllers
         [HttpGet]
         public async Task<ActionResult<List<SuperHero>>> GetAllHeroes()
         {
-            return superHeroService.GetAllHeroes();
+            return await superHeroService.GetAllHeroes();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<SuperHero>> GetSingleHeroes(int id)
         {
-            var hero = superHeroService.GetSingleHeroes(id);
+            var hero = await superHeroService.GetSingleHeroes(id);
             if (hero is null)
             {
                 return NotFound("Sorry, But this hero doesn't exist.");
@@ -36,14 +36,14 @@ namespace SuperHeroApi.Controllers
         [HttpPost]
         public async Task<ActionResult<SuperHero>> AddHero([FromBody] SuperHero hero)
         {
-            superHeroService.AddHero(hero);
+            await superHeroService.AddHero(hero);
             return Ok(hero);
         }
 
         [HttpPut]
         public async Task<ActionResult<SuperHero>> UpdateHero(SuperHero request)
         {
-            var hero = superHeroService.UpdateHero(request);
+            var hero = await superHeroService.UpdateHero(request);
             if (hero is null)
             {
                 return NotFound("Sorry, But this hero doesn't exist.");
@@ -54,7 +54,7 @@ namespace SuperHeroApi.Controllers
         [HttpDelete("id")]
         public async Task<ActionResult<List<SuperHero>>> DeleteHero(int id)
         {
-            var hero = superHeroService.DeleteHero(id);
+            var hero = await superHeroService.DeleteHero(id);
             if (hero is null)
             {
                 return NotFound("Sorry, But this hero doesn't exist.");
